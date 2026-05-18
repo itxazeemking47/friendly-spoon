@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & 3D Test Portal</title>
+    
+    <!-- 3D Model Viewer ke liye Zaroori Scripts -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #4a0e17;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* 3D Model Ka Container */
+        model-viewer {
+            width: 100%;
+            height: 250px;
+            margin: 0 auto;
+            background-color: transparent;
+        }
+
+        .btn-voice {
+            background-color: #ff477e;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(255, 71, 126, 0.4);
+        }
+
+        .btn-voice:hover {
+            background-color: #ff0a54;
+            transform: scale(1.05);
+        }
+
+        .btn-voice:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Love Portal AI Test</h1>
+        
+        <!-- 3D Model Tag: src mein model ka link hota hai -->
+        <!-- auto-rotate aur camera-controls se model ghumta hai -->
+        <model-viewer 
+            src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb" 
+            ar 
+            camera-controls 
+            auto-rotate 
+            shadow-intensity="1">
+        </model-viewer>
+
+        <button class="btn-voice" onclick="playVoice()">Listen Message ❤️</button>
+    </div>
+
+    <script>
+        function playVoice() {
+            // Jo message aap sunana chahte hain wo yahan likhein
+            let text = "Welcome back, my love! You look absolutely beautiful today.";
+            
+            // Web Speech API ka istemal
+            let speech = new SpeechSynthesisUtterance();
+            speech.text = text;
+            speech.lang = 'en-US'; // English Voice
+            speech.rate = 0.9;     // Speed (0.1 se 2 tak set ho sakti hai)
+            speech.pitch = 1.1;    // Awaz thodi barik ya bhari karne ke liye
+
+            // Kuch browsers require karte hain ki user pehle kahin click kare, isliye button par lagaya hai
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
+
+</body>
+</html>
